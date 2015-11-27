@@ -1,0 +1,9 @@
+{
+  "rsb_scope" : "/kognihome/userprofiles" ,
+  
+  "db_host"   : "localhost" ,
+  "db_port"   : 27017 ,
+  "db_name"   : "becker", 
+  
+  "data_path" : "src/main/resources/data/"
+}

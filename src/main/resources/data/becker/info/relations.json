@@ -1,0 +1,9 @@
+{
+    "spouse" : [ { "katharinabecker" : "heinrichbecker" } , 
+                 { "christinabecker" : "alexanderbecker" } 
+               ] ,
+    "child"  : [ { "alexanderbecker" : [ "paulbecker", "lottebecker", "ninabecker" ] } ,
+                 { "christinabecker" : [ "paulbecker", "lottebecker" ] } ,
+                 { "katharinabecker" : [ "alexanderbecker" ] }
+               ] 
+}

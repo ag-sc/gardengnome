@@ -1,0 +1,9 @@
+{
+    "uid" : "heinrichbecker" ,
+
+    "status"  : "family" ,
+    "inhouse" : false ,
+    
+    "constraints" : { "kitchen": { "stove_access" : false } }
+    
+}

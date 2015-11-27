@@ -1,0 +1,12 @@
+{ 
+  "uid" : "katharinabecker" , 
+  
+  "name": { "firstname" : "Katharina" ,
+            "lastname"  : "Becker" }, 
+
+  "birthdate" : "1952-12-03" ,
+  
+  "gender"    : "female" ,
+
+  "height"    : { "value" : 168, "unit" : "cm" } 
+}
