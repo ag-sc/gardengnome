@@ -38,7 +38,7 @@ public class Start {
      * Connects to database and starts RSB service. 
      * In "factoryreset" mode, it will also build the database from scratch. 
      * (Previously stored data will be lost.)
-     * @param  optional string argument "factoryreset"
+     * @param  string argument "factoryreset" (optional)
      * @throws java.io.IOException
      * @throws rsb.RSBException
      * @throws java.lang.InterruptedException
@@ -51,7 +51,7 @@ public class Start {
         
         try {
             gnome = new Gnome();
-            gnome.connectToDB(db_host, db_port, db_name);
+            gnome.connectToDB(db_host,db_port,db_name);
             gnome.activate(rsb_scope);
 
             // If "factoryreset" is provided as argument, then initialize database 
@@ -72,7 +72,9 @@ public class Start {
                 gnome.factoryReset(data_path,db_name);
             }
             
-            while (true) { Thread.sleep(1); }
+            log.info("Ready.");
+            
+        //  while (true) { Thread.sleep(1); }
         }
         catch (Exception e) {
             

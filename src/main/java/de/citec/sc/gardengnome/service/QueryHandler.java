@@ -10,14 +10,14 @@ import rsb.RSBException;
  *
  * @author cunger
  */
-public class Brain extends AbstractEventHandler {
+public class QueryHandler extends AbstractEventHandler {
     
     Gnome gnome;
     
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
     
-    public Brain(Gnome gnome) {
+    public QueryHandler(Gnome gnome) {
         
         this.gnome = gnome;
     }
@@ -31,7 +31,8 @@ public class Brain extends AbstractEventHandler {
         log.info("Received:  " + event.toString());
         log.info("With data: " + data);
         
-        if (!data.matches("[^.]+\\.[^.]+")) {            
+        if (!data.matches("[^.]+\\.[^.]+")) { 
+            // TODO more serious checking
             log.warning("Don't know how to handle the data!");
             return;
         } 
@@ -55,8 +56,7 @@ public class Brain extends AbstractEventHandler {
         try {
             gnome.mouth.speak(payload);
         } catch (RSBException ex) {
-            Logger.getLogger(Brain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QueryHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

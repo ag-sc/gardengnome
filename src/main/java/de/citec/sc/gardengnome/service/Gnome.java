@@ -11,40 +11,29 @@ import rsb.RSBException;
  */
 public class Gnome {
     
-    Brain brain;   
-    Ear   ear;
+    Ears  ears;
     Mouth mouth;
+    
     PersonMemory memory;
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
     
     public Gnome() {
-
-        brain = new Brain(this);
     }
     
     public void connectToDB(String db_host, int db_port, String db_name) {
-        
-        log.info("Connecting to database (host: " + db_host + ", port: " + db_port + ")...");
-        
+                
         memory = new PersonMemory(db_host,db_port);
         memory.setDB(db_name);
         
-        log.info("Done. Active database: " + db_name);
+        log.info("Connected to database '" + db_name +"' (host: " + db_host + ", port: " + db_port + ").");
     }   
     
     public void activate(String rsb_scope) throws RSBException, InterruptedException {
-        
-        log.info("Waking up...");
-        
-        ear = new Ear(brain,rsb_scope + "/request");
-        ear.open();
-
-        mouth = new Mouth(rsb_scope + "/answer");
-        mouth.open();
-        
-        log.info("Ready.\n Listening to: '" + rsb_scope + "/request' \n Sending to:   '" + rsb_scope + "/answer'");
+                
+        ears  = new Ears(rsb_scope,new QueryHandler(this),new WriteHandler(this));
+        mouth = new Mouth(rsb_scope);
     }
     
     public void factoryReset(String data_path, String db_name) throws IOException {
@@ -66,7 +55,7 @@ public class Gnome {
     
     public void deactivate() throws RSBException, InterruptedException {
         
-        ear.shut();
+        ears.shut();
         mouth.shut();
         memory.shutDown();
     }

@@ -11,26 +11,19 @@ import rsb.RSBException;
  * @author cunger
  */
 public class Mouth {
-       
-    String           scope;
-    
-    Factory          factory;
+           
     Informer<Object> informer;
 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
     
-    public Mouth(String scope) {
+    public Mouth(String scope) throws InitializeException, RSBException {
         
-        this.scope = scope;
-    }
-    
-    
-    public void open() throws InitializeException, RSBException {
-        
-        factory = Factory.getInstance();
-        informer = factory.createInformer(scope);
+        Factory factory = Factory.getInstance();
+        informer = factory.createInformer(scope + "/answer");
         informer.activate();
+        
+        log.info("Sending to: '" + scope + "/answer'");
     }
     
     public void speak(String payload) throws RSBException {

@@ -25,7 +25,7 @@ public class GnomeTest {
         gnome.activate("/kognihome/userprofiles");
                
         Factory factory = Factory.getInstance();
-        Informer<Object> informer = factory.createInformer("/kognihome/userprofiles/request");
+        Informer<Object> informer = factory.createInformer("/kognihome/userprofiles/query");
         informer.activate();
         
         Listener listener = factory.createListener("/kognihome/userprofiles/answer");       
