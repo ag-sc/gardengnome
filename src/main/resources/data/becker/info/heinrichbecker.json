@@ -8,5 +8,5 @@
   
   "gender"    : "male" ,
 
-  "height"    : { "value" : 175, "unit" : "cm" } 
+  "height"    : 175
 }

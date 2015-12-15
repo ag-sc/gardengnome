@@ -1,18 +1,25 @@
 package de.citec.sc.gardengnome.database;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.util.JSON;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.bson.Document;
-import org.bson.conversions.Bson;
+import org.json.simple.parser.ContainerFactory;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -22,6 +29,18 @@ public abstract class Memory {
            
     MongoClient mongoClient;
     MongoDatabase db;
+    
+    JSONParser json = new JSONParser();   
+    ContainerFactory container = new ContainerFactory() {
+        @Override
+        public Map createObjectContainer() {
+            return new HashMap();
+        }
+        @Override
+        public List creatArrayContainer() {
+            return new ArrayList();
+        }
+    };
     
     private static final Logger log = Logger.getLogger(Logger.class.getName());
     
@@ -88,17 +107,48 @@ public abstract class Memory {
         log.info(info);
     }
 
-    
-    public String query(String collection_name, String query) {
-                
-        MongoCollection collection = db.getCollection(collection_name);
+    public String queryDocument(String coll, String doc) {
         
-	FindIterable results = collection.find((Bson) JSON.parse(query));
+        String answer;
         
-               
+        try { 
+            Map map = (Map) json.parse(doc,container);
+            
+            Document query = new Document();
+            for (Object key : map.keySet()) {
+                 query.append((String) key, (String) map.get(key));
+            }
+            
+            MongoCollection collection = db.getCollection(coll);
+            FindIterable results = collection.find(query);
+            
+            Document result = (Document) results.first();
+            answer = result.toJson();
+        }
+        catch (Exception e) {
+            answer = null;
+        }
         
-        return "Fnord!";
+        return answer;
     }
+        
+    public Boolean writeDocument(String coll, String doc, String creator) {
+        
+        try {
+            Map map = (Map) json.parse(doc,container);
+            map.put("_creator",creator);
+            map.put("_timestamp",Calendar.getInstance().toInstant().toString());
+                    
+            MongoCollection collection = db.getCollection(coll);
+            collection.insertOne(new Document(map));
+            
+            return true;
+        } 
+        catch (Exception e) {
+            return false;
+        }
+    }
+    
     
     public void shutDown() {
         

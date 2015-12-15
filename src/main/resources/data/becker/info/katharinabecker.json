@@ -8,5 +8,5 @@
   
   "gender"    : "female" ,
 
-  "height"    : { "value" : 168, "unit" : "cm" } 
+  "height"    : 168
 }

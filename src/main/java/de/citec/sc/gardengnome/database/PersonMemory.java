@@ -11,28 +11,28 @@ import org.bson.Document;
  * @author cunger
  */
 public class PersonMemory extends Memory {
-
+ 
     private static final Logger log = Logger.getLogger(Logger.class.getName());
-
+    
     
     public PersonMemory(String db_host, int db_port) {
         super(db_host, db_port);
     }
-    
+
     
     // Custom queries 
     
     /*  
-    /* Get a particular attribute of person (uid) as string: 
-    /* birthdate, gender, height
+    /* Get a particular attribute of person (uid) as string,  
+    /* e.g. birthdate, gender, height.
     */
-    public String queryAttribute(String uid, final String attribute) {
+    public String queryAttribute(String coll, String uid, final String attribute) {
                
         String answer;
         
         try {
-            MongoCollection info = db.getCollection("info");       
-            FindIterable results = info.find(new Document("uid",uid));
+            MongoCollection collection = db.getCollection(coll);       
+            FindIterable results = collection.find(new Document("uid",uid));
             
             answer = ((Document) results.first()).get(attribute).toString();
         }
@@ -48,7 +48,7 @@ public class PersonMemory extends Memory {
     
     public int queryAge(String uid) {
         
-        String birthdate = queryAttribute(uid,"birthdate");
+        String birthdate = queryAttribute("info",uid,"birthdate");
         
         String[] parts = birthdate.split("-");       
         int year  = Integer.parseInt(parts[0]);
@@ -66,9 +66,9 @@ public class PersonMemory extends Memory {
         return age;
     }
 
-    public boolean hasBirthdayToday(String uid) {
+    public boolean hasBirthday(String uid) {
         
-        String birthdate = queryAttribute(uid,"birthdate");
+        String birthdate = queryAttribute("info",uid,"birthdate");
         
         String[] parts = birthdate.split("-");       
         int month = Integer.parseInt(parts[1]);
