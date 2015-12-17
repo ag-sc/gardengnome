@@ -2,13 +2,11 @@ package de.citec.sc.gardengnome;
 
 import de.citec.sc.gardengnome.service.Gnome;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
 import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,15 +19,15 @@ import rsb.RSBException;
 public class Start {
     
     
-    static String config_file = "config.json";
+    static String  config_file = "config.json";
 
-    static String rsb_scope;
-    static String db_host;
-    static int    db_port;
-    static String db_name;
-    static String data_path;
+    static String  rsb_scope;
+    static String  db_host;
+    static int     db_port;
+    static String  db_name;
+    static String  data_path;
     
-    static Gnome  gnome;
+    static Gnome   gnome;
     
     private static final Logger log = Logger.getLogger(Logger.class.getName());
 
@@ -86,21 +84,20 @@ public class Start {
     
     private static void readConfig() throws IOException {
         
-        File file = new File(config_file);
         JSONParser json  = new JSONParser();
         
         try {
-             
-            InputStream in = new FileInputStream(file);    
-            String content = IOUtils.toString(in);
+            
+            File   file    = FileUtils.getFile(config_file);
+            String content = FileUtils.readFileToString(file);
             
             JSONObject config = (JSONObject) json.parse(content);     
           
-            rsb_scope = (String) config.get("rsb_scope");
-            db_host   = (String) config.get("db_host");
-            db_port   = (int)    config.get("db_port");
-            db_name   = (String) config.get("db_name");
-            data_path = (String) config.get("data_path");
+            rsb_scope = (String)  config.get("rsb_scope");
+            db_host   = (String)  config.get("db_host");
+            db_port   = ((Long)   config.get("db_port")).intValue();
+            db_name   = (String)  config.get("db_name");
+            data_path = (String)  config.get("data_path");
 
         }
         catch (FileNotFoundException e) {               
