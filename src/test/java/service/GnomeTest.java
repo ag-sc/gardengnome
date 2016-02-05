@@ -1,6 +1,6 @@
 package service;
 
-import de.citec.sc.gardengnome.service.Gnome;
+import de.citec.sc.gardengnome.service.rsb.Gnome;
 import java.io.IOException;
 import rsb.Factory;
 import rsb.Informer;
@@ -38,11 +38,17 @@ public class GnomeTest {
         
         informer.send("test");
         
+        informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"name\" }");
+        informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"firstname\" }");
+        informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"lastname\" }");
+
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"gender\" }");
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"height\" }");
+        
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"age\" }");
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"birthdate\" }");
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"hasbirthday\" }");
+        
         informer.send("{ \"uid\": \"katharinabecker\", \"ask\": \"unknown attribute\" }");
 
         informer.send("Some inknown input...");

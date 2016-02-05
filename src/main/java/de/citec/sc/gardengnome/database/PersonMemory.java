@@ -19,9 +19,7 @@ public class PersonMemory extends Memory {
         super(db_host, db_port);
     }
 
-    
-    // Custom queries 
-    
+        
     /*  
     /* Get a particular attribute of person (uid) as string,  
     /* e.g. birthdate, gender, height.
@@ -44,7 +42,7 @@ public class PersonMemory extends Memory {
         return answer;
     }
     
-    // TODO name 
+    // Custom queries 
     
     public int queryAge(String uid) {
         

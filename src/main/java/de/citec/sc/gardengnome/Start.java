@@ -1,6 +1,6 @@
 package de.citec.sc.gardengnome;
 
-import de.citec.sc.gardengnome.service.Gnome;
+import de.citec.sc.gardengnome.service.rsb.Gnome;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

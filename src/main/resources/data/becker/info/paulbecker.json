@@ -1,0 +1,13 @@
+{ 
+  "uid" : "paulbecker" , 
+  
+  "name": "Paul Becker" , 
+  "firstname" : "Paul" ,
+  "lastname"  : "Becker" , 
+
+  "birthdate" : "2002-04-27" ,
+  
+  "gender"    : "male" ,
+
+  "height"    : 160
+}

@@ -1,0 +1,28 @@
+{
+  "coll": "activitydata" ,
+  "creator": "tp3_test" ,
+
+  "doc":
+
+      {
+      "date" : "2015-12-15",
+
+      "uid": "alexanderbecker",
+
+      "activities" : [ { "type" : "cycling",
+                         "duration" : 30,
+                         "intensity" : 60 },
+                       { "type" : "walking",
+                         "duration" : 20,
+                         "intensity" : 40 },
+                       { "type" : "strength training",
+                         "duration" : 40,
+                         "intensity" : 80 }
+                     ] ,
+
+      "biometrics" : { "weight" : 60,
+                       "bodyfat": 22,
+                       "bodywater": 51,
+                       "musclemass": 20 }
+      }
+}

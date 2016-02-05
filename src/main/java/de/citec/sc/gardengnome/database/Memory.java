@@ -97,12 +97,17 @@ public abstract class Memory {
         show();
     }
 
-    public void show() {
+    public String show() {
         
-        String info = "\nDB name: " + db.getName() + "\nCollections: "; 
-        for (String coll : db.listCollectionNames()) info += "\n * " + coll;
+        String info = "\nDB name: " + db.getName(); 
         
-        log.info(info);
+        info += "\nCollections: "; 
+        for (String coll : db.listCollectionNames()) {
+            info += "\n * " + coll;
+            info += " (" + db.getCollection(coll).count() + ")";
+        }
+                
+        return info;
     }
 
     public String queryDocument(String coll, String doc) {
@@ -132,7 +137,7 @@ public abstract class Memory {
         
     public Boolean writeDocument(String coll, String doc, String creator) {
         
-        try {
+        try {            
             Map map = (Map) json.parse(doc,container);
             map.put("_creator",creator);
             map.put("_timestamp",Calendar.getInstance().toInstant().toString());
@@ -144,6 +149,25 @@ public abstract class Memory {
         } 
         catch (Exception e) {
             return false;
+        }
+    }
+    
+    public String retrieveDocument(String coll, String doc) {
+
+        try { 
+            Map map = (Map) json.parse(doc,container);
+            Document query = new Document();
+            for (Object key : map.keySet()) {
+                query.append((String) key, (String) map.get(key));
+            }
+
+            MongoCollection collection = db.getCollection(coll);   
+            FindIterable results = collection.find(query).sort(new Document("_timestamp",-1));
+
+            return((Document) results.first()).toJson();
+        } 
+        catch (Exception e) {
+            return "null";
         }
     }
     

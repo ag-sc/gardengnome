@@ -23,9 +23,11 @@
                 </executions>
                 <configuration>
                     <mainClass>de.citec.sc.gardengnome.Start</mainClass>
-        <!--            <arguments>
+                    <!--            
+                    <arguments>
                         <argument>factoryreset</argument>
-                    </arguments>-->
+                    </arguments>
+                    -->
                 </configuration>
             </plugin>
         </plugins>
@@ -37,6 +39,11 @@
     </properties>
     
     <repositories>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Public online Restlet repository</name>
+            <url>http://maven.restlet.org</url>
+        </repository>
         <repository>
             <id>citec-releases</id>
             <name>CITEC Maven Repository Server</name>
@@ -81,7 +88,22 @@
         <dependency>
             <groupId>rsb</groupId>
             <artifactId>rst</artifactId>
-            <version>0.13-SNAPSHOT</version>
+            <version>0.12</version>
+        </dependency>
+        <dependency>
+            <groupId>rsb</groupId>
+            <artifactId>rst-sandbox</artifactId>
+            <version>0.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet</artifactId>
+            <version>2.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.simple</artifactId>
+            <version>2.3.4</version>
         </dependency>
     </dependencies>
 </project>

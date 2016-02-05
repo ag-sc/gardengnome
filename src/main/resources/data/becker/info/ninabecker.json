@@ -1,0 +1,13 @@
+{ 
+  "uid" : "ninabecker" , 
+  
+  "name": "Nina Becker" ,
+  "firstname" : "Nina" ,
+  "lastname"  : "Becker" , 
+
+  "birthdate" : "1995-11-15" ,
+  
+  "gender"    : "female" ,
+
+  "height"    : 172
+}

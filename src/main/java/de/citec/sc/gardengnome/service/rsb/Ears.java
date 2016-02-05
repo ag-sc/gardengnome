@@ -1,4 +1,4 @@
-package de.citec.sc.gardengnome.service;
+package de.citec.sc.gardengnome.service.rsb;
 
 import java.util.logging.Logger;
 import rsb.Factory;

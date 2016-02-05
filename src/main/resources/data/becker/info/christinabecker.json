@@ -1,0 +1,13 @@
+{ 
+  "uid" : "christinabecker" , 
+  
+  "name": "Christina Becker" ,
+  "firstname" : "Christina" ,
+  "lastname"  : "Becker" , 
+
+  "birthdate" : "1976-06-01" ,
+  
+  "gender"    : "female" ,
+
+  "height"    : 175
+}

@@ -1,0 +1,13 @@
+{ 
+  "uid" : "alexanderbecker" , 
+  
+  "name": "Alexander Becker", 
+  "firstname" : "Alexander" ,
+  "lastname"  : "Becker" , 
+
+  "birthdate" : "1971-09-21" ,
+  
+  "gender"    : "male" ,
+
+  "height"    : 184
+}
