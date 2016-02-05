@@ -7,11 +7,13 @@ import com.mongodb.client.MongoDatabase;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;
@@ -94,7 +96,7 @@ public abstract class Memory {
         
         // Done 
         
-        show();
+        log.info(show());
     }
 
     public String show() {
@@ -137,10 +139,13 @@ public abstract class Memory {
         
     public Boolean writeDocument(String coll, String doc, String creator) {
         
-        try {            
+        try {           
+            DateFormat format = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+            Date date = new Date();
+ 
             Map map = (Map) json.parse(doc,container);
             map.put("_creator",creator);
-            map.put("_timestamp",Calendar.getInstance().toInstant().toString());
+            map.put("_timestamp",format.format(date));
                     
             MongoCollection collection = db.getCollection(coll);
             collection.insertOne(new Document(map));
